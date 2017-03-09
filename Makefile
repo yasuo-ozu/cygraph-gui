@@ -1,7 +1,7 @@
 CXX = g++
 HEADERS = cyg_*.hpp
 SRCS = cyg_*.cpp
-CXX_OPTS = -lglut -lGLU -lGL -lm --std=c++11
+CXX_OPTS = -lm --std=c++11 `pkg-config gtkmm-2.4 --cflags --libs`
 CXX_DEBUG = -g3 -Wall -Wextra -DDEBUG
 CXX_RELEASE = -Ofast -DRELEASE
 .PHONY:	all clean release
