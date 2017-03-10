@@ -7,7 +7,6 @@ CXX_RELEASE = -Ofast -DRELEASE
 .PHONY:	all clean release
 all:	cygraph
 cygraph:	${SRCS} ${HEADERS} Makefile
-	rm -f cyg_common.hpp.gch cyg_class.hpp.gch
 	${CXX} ${CXX_OPTS} ${CXX_DEBUG} ${SRCS} -o cygraph
 release:	${SRCS} ${HEADERS} Makefile
 	${CXX} ${CXX_OPTS} ${CXX_RELEASE} ${SRCS} -o cygraph

@@ -12,6 +12,8 @@ using namespace std;
 #include <cstring>
 #include <cmath>
 
+#include <gtkmm-2.4/gtkmm.h>
+
 
 #include "./cyg_def.hpp"
 #include "./cyg_class.hpp"
