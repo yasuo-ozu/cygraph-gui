@@ -15,10 +15,11 @@ namespace Cygraph {
 	// cyg_graph.cpp
 	class Axis;
 	class Text;
+	class GraphLine;
 	class Graph {
 	public:
 		vector<Axis *> axises;
-		//vector<GraphLine *> lines;
+		vector<GraphLine *> lines;
 		boundary padding;
 
 		Graph();
@@ -44,6 +45,7 @@ namespace Cygraph {
 		void set_text(string s);
 		double get_outer_height(Graphic g, double resolution);
 		void draw(Graphic g, double resolution, rectangle rect);
+		double get_location(Graphic g, double resolution, rectangle rect, double value);
 	};
 
 	class Text {
@@ -57,6 +59,33 @@ namespace Cygraph {
 		Text();
 		Text(string s);
 		size get_size(Graphic g, double resolution);
+		void draw(Graphic g, double resolution, double x, double y);
+	};
+
+	class GraphPoint;
+	class GraphLine {
+	public:
+		Axis *axis[2];
+		bool draw_line;
+		vector<GraphPoint *> points;
+		double efficient;
+
+		GraphLine(Axis *axis1, Axis *axis2);
+		vector<location> get_points();
+		void draw(Graphic g, double resolution, map<Axis *, rectangle> locs);
+	};
+
+	class GraphPoint {
+	public:
+		enum PointShape {
+			PS_CIRCLE,
+			PS_TRIANGLE,
+			PS_SQUARE,
+		} shape;
+		double size;
+		bool invert;
+
+		GraphPoint(PointShape);
 		void draw(Graphic g, double resolution, double x, double y);
 	};
 }

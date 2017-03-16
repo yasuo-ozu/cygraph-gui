@@ -1,5 +1,3 @@
-/* You should not use pre-compiled header because this file is recursive. */
-
 #pragma once
 using namespace std;
 
@@ -13,7 +11,9 @@ using namespace std;
 #include <cmath>
 
 #include <gtkmm-2.4/gtkmm.h>
-
+#include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
 
 #include "./cyg_def.hpp"
 #include "./cyg_class.hpp"
