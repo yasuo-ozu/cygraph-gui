@@ -3,6 +3,7 @@
 namespace Cygraph {
 	int CygMain(int argc, char **argv) {
 		UNUSED(argc, argv);
+		/*
 		auto *graph = new Graph();
 		auto *axis = new Axis(0, 10, 1);
 		axis->set_text("ドレイン-ソース間電圧(Vds) [V]");
@@ -61,6 +62,20 @@ namespace Cygraph {
 		line6->points.push_back(point8);
 		line6->points.push_back(point9);
 		graph->lines.push_back(line6);
+		auto *driver = new GtkDriver(800, 600);
+		driver->render(graph);
+		*/
+const string sample_script = R"([
+print('hello,world\n')
+])";
+		Graph *graph;
+		if (argc == 2) {
+			fprintf(stderr, "Loading from %s...\n", argv[1]);
+			graph = ExecuteScript(argv[1]);
+		} else {
+			fprintf(stderr, "Loading sample...\n");
+			graph = ExecuteScriptFromText(sample_script);
+		}
 		auto *driver = new GtkDriver(800, 600);
 		driver->render(graph);
 		return 0;
