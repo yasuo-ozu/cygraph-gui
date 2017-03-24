@@ -11,9 +11,11 @@ using namespace std;
 #include <cmath>
 
 #include <gtkmm-2.4/gtkmm.h>
+extern "C" {
 #include <lua.h>
 #include <lauxlib.h>
 #include <lualib.h>
+};
 
 #include "./cyg_def.hpp"
 #include "./cyg_class.hpp"

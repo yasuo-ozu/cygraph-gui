@@ -1,4 +1,4 @@
 namespace Cygraph {
-	Graph *ExecuteScript(char *fname);
-	Graph *ExecuteScriptFromText(string src);
+	Graph *ExecuteScript(const char *fname);
+	Graph *ExecuteScriptFromText(const char *src);
 }

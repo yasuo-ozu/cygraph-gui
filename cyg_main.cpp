@@ -65,9 +65,9 @@ namespace Cygraph {
 		auto *driver = new GtkDriver(800, 600);
 		driver->render(graph);
 		*/
-const string sample_script = R"([
-print('hello,world\n')
-])";
+const char * const sample_script = R"(
+print("hello, world\n")
+)";
 		Graph *graph;
 		if (argc == 2) {
 			fprintf(stderr, "Loading from %s...\n", argv[1]);
@@ -75,6 +75,10 @@ print('hello,world\n')
 		} else {
 			fprintf(stderr, "Loading sample...\n");
 			graph = ExecuteScriptFromText(sample_script);
+		}
+		if (graph == nullptr) {
+			cerr << "Some error(s) occured." << endl;
+			return 1;
 		}
 		auto *driver = new GtkDriver(800, 600);
 		driver->render(graph);

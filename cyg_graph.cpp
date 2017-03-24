@@ -252,6 +252,7 @@ namespace Cygraph {
 		this->axis[1] = axis2;
 		this->draw_line = true;
 		this->efficient = 1.0;
+		this->func = nullptr;
 	}
 
 	vector<location> GraphLine::get_points() {
@@ -265,7 +266,11 @@ namespace Cygraph {
 			min = this->axis[0]->end;
 		}
 		for (double x = min; x <= max; x += this->draw_line ? 0.1 : 1.0) {
-			list.push_back((location){x, x * x * this->efficient});
+			if (this->func == nullptr) {
+				list.push_back((location){x, x * x * this->efficient});
+			} else {
+				list.push_back((location){x, this->func(this->tag, this->tag2, x) });
+			}
 		}
 		return list;
 	}

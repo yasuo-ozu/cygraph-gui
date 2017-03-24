@@ -69,6 +69,8 @@ namespace Cygraph {
 		bool draw_line;
 		vector<GraphPoint *> points;
 		double efficient;
+		void *tag, *tag2;
+		double (*func)(void *tag, void *tag2, double x);
 
 		GraphLine(Axis *axis1, Axis *axis2);
 		vector<location> get_points();
@@ -78,9 +80,9 @@ namespace Cygraph {
 	class GraphPoint {
 	public:
 		enum PointShape {
-			PS_CIRCLE,
-			PS_TRIANGLE,
-			PS_SQUARE,
+			PS_CIRCLE = 1,
+			PS_TRIANGLE = 2,
+			PS_SQUARE = 4,
 		} shape;
 		double size;
 		bool invert;
