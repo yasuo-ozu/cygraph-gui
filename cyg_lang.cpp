@@ -96,9 +96,9 @@ collectgarbage('collect')
 			return 1;
 		}
 		auto *line_o = lines[line];
-		if (strcmp(prop, "draw_line") == 0) {
-			int draw_line = luaL_checkinteger(L, 3);
-			line_o->draw_line = draw_line;
+		if (strcmp(prop, "weight") == 0) {
+			int weight = luaL_checknumber(L, 3);
+			line_o->weight = weight;
 		} else if (strcmp(prop, "efficient") == 0) {
 			double efficient = luaL_checknumber(L, 3);
 			line_o->efficient = efficient;

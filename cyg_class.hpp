@@ -66,7 +66,7 @@ namespace Cygraph {
 	class GraphLine {
 	public:
 		Axis *axis[2];
-		bool draw_line;
+		double weight;
 		vector<GraphPoint *> points;
 		double efficient;
 		void *tag, *tag2;

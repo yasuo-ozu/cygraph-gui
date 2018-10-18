@@ -63,7 +63,13 @@ namespace Cygraph {
 		}
 
 		for (auto *line : this->lines) {
+			g->save();
+			if (line->weight > 0.0) {
+				g->rectangle(area.x, area.y, area.width, area.height);
+				g->clip();
+			}
 			line->draw(g, resolution, axis_rects);
+			g->restore();
 		}
 	}
 
@@ -250,7 +256,7 @@ namespace Cygraph {
 	GraphLine::GraphLine(Axis *axis1, Axis *axis2) {
 		this->axis[0] = axis1;
 		this->axis[1] = axis2;
-		this->draw_line = true;
+		this->weight = 1.0;
 		this->efficient = 1.0;
 		this->func = nullptr;
 	}
@@ -265,7 +271,7 @@ namespace Cygraph {
 			max = this->axis[0]->begin;
 			min = this->axis[0]->end;
 		}
-		for (double x = min; x <= max; x += this->draw_line ? 0.1 : 1.0) {
+		for (double x = min; x <= max; x += this->weight > 0.0 ? 0.1 : 1.0) {
 			if (this->func == nullptr) {
 				list.push_back((location){x, x * x * this->efficient});
 			} else {
@@ -278,6 +284,7 @@ namespace Cygraph {
 	void GraphLine::draw(Graphic g, double resolution, map<Axis *, rectangle> locs) {
 		vector<location> points = this->get_points();
 		bool is_beginning = true;
+		if (this->weight > 0.0) g->set_line_width(this->weight);
 		for (auto point : points) {
 			location loc{0.0, 0.0};
 			for (auto *axis : this->axis) {
@@ -287,7 +294,7 @@ namespace Cygraph {
 					loc.y = axis->get_location(g, resolution, locs[axis], point.y);
 				}
 			}
-			if (this->draw_line) {
+			if (this->weight > 0.0) {
 				if (is_beginning) g->move_to(loc.x, loc.y);
 				else			  g->line_to(loc.x, loc.y);
 			}
